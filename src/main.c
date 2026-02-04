@@ -5,28 +5,46 @@
 #define ROOM_SIZE_X 10
 #define ROOM_SIZE_Y 15
 
+#define MAP_SIZE_X 50
+#define MAP_SIZE_y 100
+
 //game objects
 #define PLAYER "8"
 #define STAIRS "H"
 
 
-
 //var
+char map[MAP_SIZE_X][MAP_SIZE_y];
 char room[ROOM_SIZE_X][ROOM_SIZE_Y];
 int lvl = 0;
 int player_position[]={0,0};
 
+
 //char playerC = '8';
 
+void map_generator();
 void room_generator();
-void create_playfield();
-void draw_playfield();
+void draw_playfield(); //delete in favor of draw_game_screen
 
 int main()
 {
-	room_generator();
-	create_playfield();
+	map_generator();
+	//room_generator();
 	return 0;
+}
+
+void map_generator()
+{
+	for(int map_row = 0; map_row < MAP_SIZE_X; map_row++)
+	{
+		for(int map_column = 0; map_column < MAP_SIZE_y; map_column++)
+		{
+			map[map_row][map_column] = '|';
+			printf("%c ", map[map_row][map_column]);
+		}
+		printf("\n");
+	}
+
 }
 
 void room_generator()
@@ -51,8 +69,6 @@ void room_generator()
 	}
 }
 
-void create_playfield()
-{}
 
 void draw_playfield()
 {
