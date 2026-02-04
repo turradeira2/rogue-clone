@@ -80,11 +80,5 @@ void draw_playfield()
 		}
 		printf("\n");
 	}
-	//edit and print playfield
+	//edit playfield
 }
-
-/*
- * NOTES:
- *
- * ARRAYS START AT 0 DUMBASS
- */
