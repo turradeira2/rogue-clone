@@ -28,3 +28,62 @@
 0 0 0 1 1 1 1 0 0
 0 0 0 0 1 1 0 0 0
 0 0 0 0 0 0 0 0 0
+
+
+#Notas sobre a sintax do MAKEFILE
+# O valor antes do : é o nome do objecto que será outputed pelo comando a baixo, nome formal target
+# O valor depois do : é o que deverá ser usado no linking para o executavel, nome formal: ficheiro de dependencias
+# o valor que está logo abaio é o comando que será executado
+# e o $() é uma forma de chamar as variaveis declaradas no começo do ficheiro que tem o seu nom e colocado entre os parenteses
+# o simbolo % nas pattern rules representa um nome qualquer
+# o simbolo $@ remete ao taget, parte que está a esquerda dos :
+# o simbolo $< remete ao ficheiro de dependencia, parte que está a direita dos :
+
+
+CC = gcc#declaro o compilador, no caso o gnu c compiler (coletania de copiladores do gnu)
+
+#declaração das flags para o compilador
+#Notas sobre o CFLAGS
+# -Wall adiciona os warnings basicos para o compiler
+# -Wextra adiciona avisos extras
+# -pedantic Esta flag obriga o compilador a seguir os padrões da versão do C em uso, definido na flag "-std=..." neste caso estamos usando uma versão superior a 20 (c2x)
+# -std=c2x define a versão do C, neste caso estamos a usar a ultima versão lançada,C23, formalmente conhecida como C2X
+#-Iinclude indica ao compilador que a pasta ./include tambem deve ser verificada para encontrar headers, a flag neste caso se trata do -I porem tambem deve ter o path para a pasta junto
+#        Sendo a estrutura -I + include
+
+
+
+
+CFLAGS = -Wall\
+     -Wextra\
+     -pedantic\
+     -std=c2x\
+     -Iinclude
+#Definição dos diretorios bases do codigo
+
+TARGET = MyWC #declaração do nome do app
+
+#declaração das variaveis com os nomes das pastas onde a source(src), headers(include) e objectos(obj) vão estar
+SRC_DIR = src
+INC_DIR = include
+OBJ_DIR = obj
+
+#declaração das variaveis com os caminhos para os ficheiros
+SOURCES = $(wildcard $(SRC_DIR)/*.c) #nota o wildcard ira retornar tudo que se encontre neste padrão src/*.c neste caso se leria qualquer ficheiro .c que estivesse na pasta src neste caso englobando todos os ficheiros .c de forma dinamica
+OBJECTS = $(SOURCES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o) #para que seja de forma dinamica a criação dos .o objects, estagio pré executavel, a segunte linha diz que para cada ficheiro .c na pasta src, deve ser criado um ficheiro .o na pasta obj
+
+
+#Compilação dos diferentes objectos antes de se tornar o executavel
+  #compilaçãod final do executavel
+$(TARGET): $(OBJECTS)
+  $(CC) $(OBJECTS) -o $(TARGET)
+
+  #Compilação dinamica de todos os ficheiros .c em .o que se encontrem dentro da pasta src
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c  #pattern rule que garante que o ficheiro .o é depende de um ficheiro .c de mesmo nome
+  @echo Making $@ #teste para ver se o make fica menos verbose
+  mkdir -p $(OBJ_DIR)         #garante que a pasta dos objectos exista ou se não existir a cria
+  $(CC) $(CFLAGS) -c $< -o $@
+
+#função de limpesa dos objectos|pasta dos objectos  e executaveis criados
+clean:
+  rm -rf $(OBJ_DIR) $(TARGET)
