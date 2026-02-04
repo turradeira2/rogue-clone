@@ -12,8 +12,8 @@ CFLAGS = -Wall\
 TARGET = rogue_clone
 
 #Nome das Pastas
-SRC_DIR = src
-INC_DIR = include
+SRC_DIR = src #pasta do codigo
+INC_DIR = include #pasta dos headers
 OBJ_DIR = obj
 
 
