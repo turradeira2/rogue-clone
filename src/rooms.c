@@ -1,8 +1,13 @@
 #include "../include/rooms.h"
-#include <stdlib.h>
+//#include <stdlib.h>
 
 #define ROOM_SIZE_X 10
-#define ROOM_SIZE_Y 15
+#define ROOM_SIZE_Y 20
+
+//game objects
+#define PLAYER "8"
+#define STAIRS "H"
+//#define CHEST ""
 
 char room[ROOM_SIZE_X][ROOM_SIZE_Y];
 
@@ -28,13 +33,15 @@ void empty_room()
     }
 }
 
+/*
+
 void chest_room()
 {
     empty_room();
-    int chest_position_x = 0;
-    int chest_position_y = 0;
-    chest_position_x = rand() % (1, ROOM_SIZE_X-1);
+    int chest_position_x = rand() % (ROOM_SIZE_X-1 - 1) + 1;
+    int chest_position_y = rand() % (ROOM_SIZE_Y-1 - 1) + 1;
 }
+*/
 
 /*
  * ROOM TYPES

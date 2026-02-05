@@ -5,7 +5,7 @@
 
 //const
 #define ROOM_SIZE_X 10
-#define ROOM_SIZE_Y 15
+#define ROOM_SIZE_Y 20
 
 #define MAP_SIZE_X 10
 #define MAP_SIZE_y 15
@@ -14,10 +14,30 @@
 #define PLAYER "8"
 #define STAIRS "H"
 
+//colors
+#define ANSI_COLOR_BLACK   "\x1b[30m"
+#define ANSI_COLOR_RED     "\x1b[31m"
+#define ANSI_COLOR_GREEN   "\x1b[32m"
+#define ANSI_COLOR_YELLOW  "\x1b[33m"
+#define ANSI_COLOR_BLUE    "\x1b[34m"
+#define ANSI_COLOR_MAGENTA "\x1b[35m"
+#define ANSI_COLOR_CYAN    "\x1b[36m"
+#define ANSI_COLOR_WHITE   "\x1b[37m"
+#define ANSI_COLOR_RESET   "\x1b[0m"
+
+//background colors
+#define ANSI_COLOR_BLACK_BG   "\x1b[40m"
+#define ANSI_COLOR_RED_BG     "\x1b[41m"
+#define ANSI_COLOR_GREEN_BG   "\x1b[42m"
+#define ANSI_COLOR_YELLOW_BG  "\x1b[43m"
+#define ANSI_COLOR_BLUE_BG    "\x1b[44m"
+#define ANSI_COLOR_MAGENTA_BG "\x1b[45m"
+#define ANSI_COLOR_CYAN_BG    "\x1b[46m"
+#define ANSI_COLOR_WHITE_BG   "\x1b[47m" // Light gray background
+
 
 //var
 int map[MAP_SIZE_X][MAP_SIZE_y];
-//char room[ROOM_SIZE_X][ROOM_SIZE_Y];
 int lvl = 0;
 int player_position[]={0,0};
 
@@ -28,14 +48,12 @@ void map_generator();
 //void mapper();
 void room_generator();
 void draw_playfield(); //delete in favor of draw_game_screen
-//void empty_room();
 
 int main()
 {
 	empty_room();
 	draw_playfield();
 	//map_generator();
-	//room_generator();
 	return 0;
 }
 
@@ -73,7 +91,14 @@ void draw_playfield()
 	{
 		for(int room_column = 0; room_column < ROOM_SIZE_Y; room_column++)
 		{
-			printf("%c ", room[room_row][room_column]);
+			if(room[room_row][room_column] == ' ')
+			{
+				printf("%c", room[room_row][room_column]);
+			}
+			else
+			{
+				printf(ANSI_COLOR_WHITE_BG ANSI_COLOR_BLACK "%c" ANSI_COLOR_RESET , room[room_row][room_column]);
+			}
 		}
 		printf("\n");
 	}
