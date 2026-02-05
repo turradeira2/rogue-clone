@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "../include/rooms.h"
+
 //const
 #define ROOM_SIZE_X 10
 #define ROOM_SIZE_Y 15
@@ -15,7 +17,7 @@
 
 //var
 int map[MAP_SIZE_X][MAP_SIZE_y];
-char room[ROOM_SIZE_X][ROOM_SIZE_Y];
+//char room[ROOM_SIZE_X][ROOM_SIZE_Y];
 int lvl = 0;
 int player_position[]={0,0};
 
@@ -26,10 +28,13 @@ void map_generator();
 //void mapper();
 void room_generator();
 void draw_playfield(); //delete in favor of draw_game_screen
+//void empty_room();
 
 int main()
 {
-	map_generator();
+	empty_room();
+	draw_playfield();
+	//map_generator();
 	//room_generator();
 	return 0;
 }
@@ -52,8 +57,8 @@ void map_generator()
 			if(map[map_row][map_column] == '\0') //check if coordinates are empty
 			{
 				int room_limit = 3;
-				int room  = rand() % (room_limit + 1);
-				char roomer = '0' + room;
+				int room_type  = rand() % (room_limit + 1);
+				char roomer = '0' + room_type;
 				map[map_row][map_column] = roomer;
 			}
 			printf("%c ", map[map_row][map_column]);
@@ -98,5 +103,3 @@ void draw_playfield()
 	}
 	//edit playfield
 }
-
-void empty_space() {}
