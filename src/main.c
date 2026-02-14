@@ -4,9 +4,6 @@
 #include "../include/rooms.h"
 
 //const
-#define ROOM_SIZE_X 10
-#define ROOM_SIZE_Y 20
-
 #define MAP_SIZE_X 10
 #define MAP_SIZE_y 15
 
@@ -43,16 +40,17 @@ int player_position[]={0,0};
 
 
 //char playerC = '8';
-
+void clear_screen();
 void map_generator();
 //void mapper();
 void room_generator();
-void draw_playfield(); //delete in favor of draw_game_screen
+void draw_game_screen(); //delete in favor of draw_game_screen
 
 int main()
 {
+	//clear_screen();
 	empty_room();
-	draw_playfield();
+	draw_game_screen();
 	//map_generator();
 	return 0;
 }
@@ -65,6 +63,11 @@ int main()
  * '3' - CHEST ROOM
  * '?' - ????? ROOM
  */
+
+void clear_screen()
+{
+	printf("\033[H\033[J");
+}
 
 void map_generator()
 {
@@ -85,19 +88,26 @@ void map_generator()
 	}
 }
 
-void draw_playfield()
+void draw_game_screen()
 {
+
 	for(int room_row = 0; room_row < ROOM_SIZE_X; room_row++)
 	{
 		for(int room_column = 0; room_column < ROOM_SIZE_Y; room_column++)
 		{
-			if(room[room_row][room_column] == ' ')
+			switch (room[room_row][room_column])
 			{
-				printf("%c", room[room_row][room_column]);
-			}
-			else
-			{
-				printf(ANSI_COLOR_WHITE_BG ANSI_COLOR_BLACK "%c" ANSI_COLOR_RESET , room[room_row][room_column]);
+				case '#':
+					printf(ANSI_COLOR_WHITE_BG ANSI_COLOR_BLACK "%c" ANSI_COLOR_RESET , room[room_row][room_column]);
+					break;
+
+				case 'G':
+					printf(ANSI_COLOR_YELLOW "%c" ANSI_COLOR_RESET , room[room_row][room_column]);
+					break;
+
+				default:
+					printf("%c", room[room_row][room_column]);
+					break;
 			}
 		}
 		printf("\n");
