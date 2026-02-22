@@ -1,10 +1,7 @@
-#include "../include/rooms.h"
 #include <stdlib.h>
 
-//game objects
-#define PLAYER "8"
-#define STAIRS "H"
-//#define CHEST ""
+#include "../include/rooms.h"
+#include "../include/game_objects.h"
 
 char room[ROOM_SIZE_Y][ROOM_SIZE_X];
 
@@ -30,12 +27,11 @@ void empty_room()
     }
 }
 
-
 void loot_room()
 {
     empty_room();
-    int loot_position_x = rand() % (ROOM_SIZE_X-1 - 1) + 1;
-    int loot_position_y = rand() % (ROOM_SIZE_Y-1 - 1) + 1;
+    int loot_position_x = rand() % ((ROOM_SIZE_X-1 - 1) + 1);
+    int loot_position_y = rand() % ((ROOM_SIZE_Y-1 - 1) + 1);
     room[loot_position_x][loot_position_y] = LOOT_GOLD;
 }
 
