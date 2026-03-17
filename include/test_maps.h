@@ -4,6 +4,6 @@
 #define MAP_X 5
 #define MAP_Y 5
 
-extern int map[MAP_X][MAP_Y];
+extern int test_map[MAP_X][MAP_Y];
 
 #endif

@@ -1,7 +1,7 @@
 #ifndef GAME_OBJECTS_H
 #define GAME_OBJECTS_H
 
-#define PLAYER '8'
+#define PLAYER '@'
 #define STAIRS 'H'
 #define CHEST 'C'
 

@@ -1,7 +1,7 @@
 CC = gcc
 
 #Flags para o compilador
-CFLAGS = -Wall -Wextra -pedantic -std=c2x -Iinclude
+CFLAGS = -Wall -Wextra -pedantic -std=c2x -Iinclude -lncurses
 
 #Nome output do exec
 TARGET = rogue_clone
